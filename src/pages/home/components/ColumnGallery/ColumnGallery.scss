@@ -1,0 +1,131 @@
+@import "../../../../scss/colors.scss", "../../../../scss/fonts.scss",
+  "../../../../scss/animations.scss";
+
+  $padding_hover: 20px;
+
+.column_gallery {
+  display: grid;
+  height: fit-content;
+  gap: 30px;
+
+  .image_container {
+    position: relative;
+    cursor: pointer;
+
+    img {
+      display: block;
+    }
+
+    .hover_container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.35);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+
+      .download_image_btn {
+        position: absolute;
+        top: $padding_hover;
+        right: $padding_hover;
+        width: 45px;
+        height: 35px;
+        border-radius: 10px;
+        border: none;
+        background-color: #e7e7e7;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.3s ease;
+
+        svg {
+          width: 15px;
+          height: 15px;
+
+          g {
+            g {
+              stroke: rgba($color: #000000, $alpha: 0.45);
+              transition: stroke 0.3s ease;
+            }
+          }
+        }
+
+        &:hover {
+          background-color: #ffffff;
+
+          svg {
+            g {
+              g {
+                stroke: #000000;
+              }
+            }
+          }
+        }
+      }
+
+      .username_information {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: $padding_hover;
+        left: $padding_hover;
+        .image_avatar_container {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+
+        .username_name {
+          color: $white_color;
+          font-family: $main_font;
+          margin-left: 10px;
+          font-size: 12px;
+        }
+      }
+    }
+
+    &:hover {
+      .hover_container {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+@media (min-width:768px) {
+ .column_gallery {
+     .image_container {
+         .hover_container {
+             .username_information {
+                 .username_name {
+                     font-size: 15px;
+                 }
+             }
+         }
+     }
+ }
+}
+
+@media (min-width:1008px) {
+    $padding_hover: 25px;
+
+    .column_gallery {
+        .image_container {
+            .hover_container {
+                .download_image_btn {
+                    top: $padding_hover;
+                    right: $padding_hover;
+                }
+
+                .username_information {
+                    bottom: $padding_hover;
+                    left: $padding_hover;
+                }
+            }
+        }
+    }
+}
