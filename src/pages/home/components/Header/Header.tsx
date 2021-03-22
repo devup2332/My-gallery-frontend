@@ -1,14 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Header.scss";
-import LogoHeader from "../../../../assets/images/logo_header.png";
-import LogoHeaderTablet from "../../../../assets/images/logo_header_tablet.png";
+import { ReactComponent as LogoMovileSVG } from '../../../../assets/icons/logo_movile.svg';
+import { ReactComponent as LogoTabletSVG } from '../../../../assets/icons/logo_tablet.svg';
 import { ReactComponent as MenuSVG } from "../../../../assets/icons/menu.svg";
 import { ReactComponent as SearchSVG } from "../../../../assets/icons/search.svg";
+import { useHistory } from "react-router";
 
 const HeaderComponent = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const btnMenuRef = useRef<HTMLButtonElement>(null);
-  const [logo, setLogo] = useState(LogoHeader);
+  const headerRef = useRef<HTMLDivElement>(null)
+  const [changeLogo, setChangeLogo] = useState(false);
+  const history = useHistory();
 
   const closeNav = (e: MouseEvent) => {
     if (
@@ -34,9 +37,9 @@ const HeaderComponent = () => {
     const mql = window.matchMedia("(min-width:760px)");
     const tabletLogo = (ev: MediaQueryListEvent | MediaQueryList) => {
       if (ev.matches) {
-        setLogo(LogoHeaderTablet);
+        setChangeLogo(true)
       } else {
-        setLogo(LogoHeader);
+        setChangeLogo(false)
       }
     };
     mql.addEventListener("change", tabletLogo);
@@ -44,15 +47,28 @@ const HeaderComponent = () => {
     return;
   };
 
+  const goToRegister = () => {
+    history.push('/register');
+  }
+
   useEffect(() => {
     setLogoListener();
+    document.addEventListener('scroll', ()=> {
+      if(document.documentElement.scrollTop > 100) {
+        headerRef.current?.classList.add('down');
+      }else {
+        headerRef.current?.classList.remove('down');
+      }
+    });
   }, []);
   return (
-    <div className="header_component_container">
+    <div className="header_component_container" ref={headerRef}>
       <div className="subcontainer_header">
         <div className="rigth_container_header">
           <div className="logo_header_container">
-            <img src={logo} alt="" />
+            {
+              changeLogo?<LogoTabletSVG />:<LogoMovileSVG />
+            }
           </div>
           <form className="input_search_container">
             <input
@@ -71,7 +87,7 @@ const HeaderComponent = () => {
         <nav className="navigation_header" ref={navRef}>
           <ul className="menu_navigation_header">
             <li className="menu_item_navigation">Login</li>
-            <li className="menu_item_navigation">Register</li>
+            <li className="menu_item_navigation" onClick={goToRegister}>Register</li>
           </ul>
         </nav>
       </div>

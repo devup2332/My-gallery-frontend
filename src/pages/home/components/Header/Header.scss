@@ -10,6 +10,7 @@
   left: 0;
   z-index: 1;
   width: 100vw;
+  transition: background-color 0.3s ease;
 
   .subcontainer_header {
     display: flex;
@@ -30,6 +31,10 @@
         height: 40px;
         display: flex;
         align-items: center;
+
+        svg {
+          fill: $white_color;
+        }
       }
 
       .input_search_container {
@@ -114,18 +119,43 @@
   }
 }
 
+.header_component_container.down {
+  background-color: $white_color;
+  box-shadow: 0px 5px 10px 0px rgba($color: $dark_color, $alpha: 0.35);
+
+  .subcontainer_header {
+    .logo_header_container {
+      svg {
+        fill: $dark_color;
+      }
+    }
+    .rigth_container_header {
+      .input_search_container {
+        .input_search_header {
+          background-color: #eeeeee;
+        }
+      }
+    }
+    .btn_menu_header {
+      svg {
+        fill: $dark_color;
+      }
+    }
+  }
+}
+
 @media (min-width: 760px) {
   .header_component_container {
     .subcontainer_header {
       width: 75%;
-      
+
       .rigth_container_header {
         width: 75%;
         max-width: 440px;
         .logo_header_container {
           width: 95px;
         }
-  
+
         .input_search_container {
           width: 310px;
         }
@@ -158,13 +188,26 @@
         }
       }
     }
+  }
 
-    
+  .header_component_container.down {
+    .subcontainer_header {
+      .navigation_header {
+        ul {
+          li {
+            color: $dark_color;
+            &:nth-child(2) {
+              color: $accent_color;
+              border-left-color: $dark_color;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .header_component_container {
     padding: 20px 0px;
     height: unset;
