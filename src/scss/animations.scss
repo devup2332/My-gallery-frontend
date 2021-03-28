@@ -48,3 +48,52 @@
         opacity: 1;
     }
 }
+
+.fadeIn {
+    animation: fadeIn ease forwards;
+    animation-duration: .3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.vectorEntrance {
+    animation: vectorEntrance .5s ease forwards;
+    animation-delay: 1s;
+}
+
+@keyframes vectorEntrance {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10%);
+        visibility: hidden;
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.formEntrance {
+    animation: formEntrance .5s ease forwards;
+    animation-delay: .5s;
+}
+
+@keyframes formEntrance {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

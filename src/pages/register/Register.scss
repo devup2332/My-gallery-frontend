@@ -1,0 +1,37 @@
+@import '../../scss/animations.scss';
+
+.register_page_container {
+  .left_container {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .register_page_container {
+    display: flex;
+    height: 100vh;
+
+    .left_container {
+      display: block;
+      width: 50%;
+      position: relative;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -10%);
+        width: 70%;
+        max-width: 530px;
+        opacity: 0;
+        visibility: hidden;
+        animation-delay: 1s;
+      }
+    }
+  }
+}

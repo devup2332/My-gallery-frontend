@@ -3,9 +3,9 @@ import { Redirect, Route } from "react-router";
 import { PublicRoutes } from "../models/publicRoutes";
 
 const PublicRoutesComponent = ({ Component, path }: PublicRoutes) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("t1ks1ehn");
   if (!token) {
-    return ( 
+    return (
       <Route exact path={path}>
         <Suspense fallback="loading">
           <Component />
@@ -14,7 +14,7 @@ const PublicRoutesComponent = ({ Component, path }: PublicRoutes) => {
     );
   }
 
-  return <Redirect to="/admin" />;
+  return <Redirect to="/home" />;
 };
 
 export default PublicRoutesComponent;
