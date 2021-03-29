@@ -12,6 +12,7 @@ const HeaderComponent = ({ user }: HeaderProps) => {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [changeLogo, setChangeLogo] = useState(false);
+  const token = localStorage.getItem("t1ks1ehn");
   const history = useHistory();
 
   const HandleClick = (e: MouseEvent) => {
@@ -71,9 +72,9 @@ const HeaderComponent = ({ user }: HeaderProps) => {
     <div className="header_component_container" ref={headerRef}>
       <div className="subcontainer_header">
         <div className="rigth_container_header">
-          <div className="logo_header_container">
+          <Link to="/home" className="logo_header_container">
             {changeLogo ? <LogoTabletSVG /> : <LogoMovileSVG />}
-          </div>
+          </Link>
           <form className="input_search_container">
             <input
               type="text"
@@ -85,7 +86,7 @@ const HeaderComponent = ({ user }: HeaderProps) => {
             </button>
           </form>
         </div>
-        {user ? (
+        {token ? (
           <button
             className="btn_user_profile"
             ref={btnMenuRef}
@@ -103,11 +104,13 @@ const HeaderComponent = ({ user }: HeaderProps) => {
           </button>
         )}
 
-        {user ? (
+        {token ? (
           <nav className="navigation_header user" ref={navRef}>
             <ul className="menu_navigation_header">
               <li className="menu_item_navigation">Add Photo</li>
-              <li className="menu_item_navigation">Profile</li>
+              <Link to="/profile" className="menu_item_navigation">
+                Profile
+              </Link>
               <li className="menu_item_navigation" onClick={logOutUser}>
                 Log Out
               </li>

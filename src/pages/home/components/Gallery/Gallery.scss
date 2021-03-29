@@ -1,19 +1,19 @@
 .gallery_component_container {
-    padding: 50px 0px;
+  padding: 50px 0px;
 
-    .subcontainer_gallery {
-        display: flex;
-        gap: 40px;
-        max-width: 1400px;
-        margin: auto;
-    }
+  .subcontainer_gallery {
+    display: flex;
+    gap: 40px;
+    max-width: 1400px;
+    margin: auto;
+  }
 }
 
-@media (min-width:600px) {
-    .gallery_component_container {
-        .subcontainer_gallery {
-            width: 76%;
-            max-width: 1180px;
-        }
+@media (min-width: 600px) {
+  .gallery_component_container {
+    .subcontainer_gallery {
+      width: 76%;
+      max-width: 1180px;
     }
+  }
 }
