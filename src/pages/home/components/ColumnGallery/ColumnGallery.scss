@@ -1,7 +1,6 @@
-@import "../../../../scss/colors.scss", "../../../../scss/fonts.scss",
-  "../../../../scss/animations.scss";
+@import "../../../../scss/variables.scss";
 
-  $padding_hover: 20px;
+$padding_hover: 20px;
 
 .column_gallery {
   display: grid;
@@ -96,36 +95,36 @@
   }
 }
 
-@media (min-width:768px) {
- .column_gallery {
-     .image_container {
-         .hover_container {
-             .username_information {
-                 .username_name {
-                     font-size: 15px;
-                 }
-             }
-         }
-     }
- }
+@media (min-width: 768px) {
+  .column_gallery {
+    .image_container {
+      .hover_container {
+        .username_information {
+          .username_name {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
 }
 
-@media (min-width:1008px) {
-    $padding_hover: 25px;
+@media (min-width: 1008px) {
+  $padding_hover: 25px;
 
-    .column_gallery {
-        .image_container {
-            .hover_container {
-                .download_image_btn {
-                    top: $padding_hover;
-                    right: $padding_hover;
-                }
-
-                .username_information {
-                    bottom: $padding_hover;
-                    left: $padding_hover;
-                }
-            }
+  .column_gallery {
+    .image_container {
+      .hover_container {
+        .download_image_btn {
+          top: $padding_hover;
+          right: $padding_hover;
         }
+
+        .username_information {
+          bottom: $padding_hover;
+          left: $padding_hover;
+        }
+      }
     }
+  }
 }

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Header.scss";
 import { ReactComponent as LogoMovileSVG } from "../../../../assets/icons/logo_movile.svg";
 import { ReactComponent as LogoTabletSVG } from "../../../../assets/icons/logo_tablet.svg";
 import { ReactComponent as MenuSVG } from "../../../../assets/icons/menu.svg";
 import { ReactComponent as SearchSVG } from "../../../../assets/icons/search.svg";
 import { useHistory } from "react-router";
 import { HeaderProps } from "../../../../models/header-home";
+import { Link } from "react-router-dom";
 
 const HeaderComponent = ({ user }: HeaderProps) => {
   const navRef = useRef<HTMLDivElement>(null);
@@ -14,7 +14,7 @@ const HeaderComponent = ({ user }: HeaderProps) => {
   const [changeLogo, setChangeLogo] = useState(false);
   const history = useHistory();
 
-  const closeNav = (e: MouseEvent) => {
+  const HandleClick = (e: MouseEvent) => {
     if (
       e.target !== btnMenuRef.current &&
       e.target !== btnMenuRef.current?.children[0] &&
@@ -24,7 +24,7 @@ const HeaderComponent = ({ user }: HeaderProps) => {
       e.target !== btnMenuRef.current?.children[0].children[3]
     ) {
       navRef.current?.classList.remove("bounce_menu");
-      document.removeEventListener("click", closeNav);
+      window.removeEventListener("click", HandleClick);
     }
   };
 
@@ -33,41 +33,40 @@ const HeaderComponent = ({ user }: HeaderProps) => {
     history.push("/");
   };
 
-  const openMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const openMenu = () => {
     navRef.current?.classList.toggle("bounce_menu");
-    document.removeEventListener("click", closeNav);
-    document.addEventListener("click", closeNav);
+    window.addEventListener("click", HandleClick);
   };
 
-  const setLogoListener = () => {
-    const mql = window.matchMedia("(min-width:760px)");
-    const tabletLogo = (ev: MediaQueryListEvent | MediaQueryList) => {
-      if (ev.matches) {
-        setChangeLogo(true);
-      } else {
-        setChangeLogo(false);
-      }
-    };
-    mql.addEventListener("change", tabletLogo);
-    tabletLogo(mql);
-    return;
+  const ResizeHandler = () => {
+    const width = document.documentElement.clientWidth + 15;
+    if (width >= 760) {
+      setChangeLogo(true);
+    } else {
+      setChangeLogo(false);
+    }
   };
 
-  const goToRegister = () => {
-    history.push("/register");
+  const ScrollHandler = () => {
+    const height = document.documentElement.scrollTop;
+    if (height > 100) {
+      headerRef.current?.classList.add("down");
+    } else {
+      headerRef.current?.classList.remove("down");
+    }
   };
 
   useEffect(() => {
-    setLogoListener();
-    document.addEventListener("scroll", () => {
-      if (document.documentElement.scrollTop > 100) {
-        headerRef.current?.classList.add("down");
-      } else {
-        headerRef.current?.classList.remove("down");
-      }
-    });
-    return;
+    window.addEventListener("scroll", ScrollHandler);
+    window.addEventListener("resize", ResizeHandler);
+    ResizeHandler();
+
+    return () => {
+      window.removeEventListener("resize", ResizeHandler);
+      window.removeEventListener("scroll", ScrollHandler);
+    };
   }, []);
+
   return (
     <div className="header_component_container" ref={headerRef}>
       <div className="subcontainer_header">
@@ -92,7 +91,7 @@ const HeaderComponent = ({ user }: HeaderProps) => {
             ref={btnMenuRef}
             onClick={openMenu}
           >
-            <img src={user.avatar} alt="" />
+            <img src={user?.avatar} alt="" />
           </button>
         ) : (
           <button
@@ -117,10 +116,12 @@ const HeaderComponent = ({ user }: HeaderProps) => {
         ) : (
           <nav className="navigation_header noUser" ref={navRef}>
             <ul className="menu_navigation_header">
-              <li className="menu_item_navigation">Login</li>
-              <li className="menu_item_navigation" onClick={goToRegister}>
+              <Link className="menu_item_navigation" to="/login">
+                Login
+              </Link>
+              <Link className="menu_item_navigation" to="/register">
                 Register
-              </li>
+              </Link>
             </ul>
           </nav>
         )}

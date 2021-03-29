@@ -24,8 +24,6 @@ const HomePage = () => {
       setUser(data.user);
       return;
     }
-
-    return;
   };
 
   useEffect(() => {

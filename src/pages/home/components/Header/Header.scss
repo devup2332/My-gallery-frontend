@@ -1,4 +1,4 @@
-@import "../../../../scss/colors.scss", "../../../../scss/fonts.scss";
+@import "../../../../scss/variables.scss";
 
 .header_component_container {
   background-color: $primary_color;
@@ -120,8 +120,10 @@
       ul {
         list-style: none;
 
-        li {
+        .menu_item_navigation {
           color: $white_color;
+          display: block;
+          text-decoration: none;
           padding: 10px 20px;
           font-family: $main_font;
           font-size: 12px;
@@ -132,7 +134,7 @@
 
     .navigation_header.user {
       .menu_navigation_header {
-        li {
+        .menu_item_navigation {
           &:last-child {
             color: $danger_color;
           }
@@ -165,7 +167,7 @@
     }
     .navigation_header.user {
       .menu_navigation_header {
-        li {
+        .menu_item_navigation {
           color: $white_color;
 
           &:last-child {
@@ -214,7 +216,7 @@
         ul {
           display: flex;
 
-          li {
+          .menu_item_navigation {
             padding: 0px 10px;
             font-size: 15px;
 
@@ -232,7 +234,7 @@
     .subcontainer_header {
       .navigation_header {
         ul {
-          li {
+          .menu_item_navigation {
             color: $dark_color;
             &:nth-child(2) {
               color: $accent_color;
@@ -272,7 +274,7 @@
 
       .navigation_header.user {
         .menu_navigation_header {
-          li {
+          .menu_item_navigation {
             font-size: 15px;
           }
         }

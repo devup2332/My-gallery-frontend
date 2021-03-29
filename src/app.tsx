@@ -7,17 +7,17 @@ import {
 } from "react-router-dom";
 import PublicRoutesComponent from "./guards/public-routes";
 import "./styles.scss";
-import Pusher from 'pusher-js';
-
+import Pusher from "pusher-js";
 
 const HomePage = React.lazy(() => import("./pages/home/Home"));
 const RegisterPage = React.lazy(() => import("./pages/register/Register"));
+const LoginPage = React.lazy(() => import("./pages/login/Login.page"));
 
-const pusher = new Pusher("7a1ea605dc1a765a5bc1",{
-  cluster: "us2"
+const pusher = new Pusher("7a1ea605dc1a765a5bc1", {
+  cluster: "us2",
 });
 
-export const channel = pusher.subscribe("my-gallery"); 
+export const channel = pusher.subscribe("my-gallery");
 
 const App = () => {
   return (
@@ -29,8 +29,9 @@ const App = () => {
           </Suspense>
         </Route>
         <PublicRoutesComponent Component={RegisterPage} path="/register" />
-        <Redirect exact from="/" to="/home"/>
-        <Redirect exact from="/**" to="/404"/>
+        <PublicRoutesComponent Component={LoginPage} path="/login" />
+        <Redirect exact from="/" to="/home" />
+        <Redirect exact from="/**" to="/404" />
       </Switch>
     </Router>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import "./ColumnGallery.scss";
 import { ColumGallery } from "../../../../models/column";
 import { ReactComponent as DownloadSVG } from "../../../../assets/icons/download.svg";
 

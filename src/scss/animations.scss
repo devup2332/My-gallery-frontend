@@ -1,99 +1,78 @@
 .text_entrance {
-    animation: textEntrance .8s ease forwards;
-    animation-delay: .5s;
+  animation: textEntrance 0.8s ease forwards;
+  animation-delay: 0.5s;
 }
 
 @keyframes textEntrance {
-    from {
-        transform: translateX(300px);
-        opacity: 0;
-    }
+  from {
+    transform: translateX(300px);
+    opacity: 0;
+  }
 
-    to {
-        transform: translateX(0px);
-        opacity: 1;
-    }
-}
-
-.btn_entrance {
-    animation: btn_entrance .8s ease forwards;
-    animation-delay: 1.5s;
-}
-
-@keyframes btn_entrance {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0px);
-        opacity: 1;
-    }
-}
-
-.vector_entrance {
-    animation: vector_entrance .8s ease forwards;
-    animation-delay: 2.3s;
-}
-
-@keyframes vector_entrance {
-    from {
-        transform: translateX(400px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0px);
-        opacity: 1;
-    }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
 }
 
 .fadeIn {
-    animation: fadeIn ease forwards;
-    animation-duration: .3s;
+  animation: fadeIn 0.3s ease forwards;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
-.vectorEntrance {
-    animation: vectorEntrance .5s ease forwards;
-    animation-delay: 1s;
+.downEntrance {
+  animation: downEntrance 0.5s ease forwards;
 }
 
-@keyframes vectorEntrance {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -10%);
-        visibility: hidden;
-    }
+@keyframes downEntrance {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 300px);
+  }
 
-    to {
-        transform: translate(-50%, -50%);
-        opacity: 1;
-        visibility: visible;
-    }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 
-.formEntrance {
-    animation: formEntrance .5s ease forwards;
-    animation-delay: .5s;
+.rightEntrance {
+  animation: rightEntrance 0.5s ease forwards;
 }
 
-@keyframes formEntrance {
-    from {
-        opacity: 0;
-    }
+@keyframes rightEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.leftEntrance {
+  animation: leftEntrance 0.5s ease forwards;
+}
+
+@keyframes leftEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }
