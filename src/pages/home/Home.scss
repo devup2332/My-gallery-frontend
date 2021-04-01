@@ -3,12 +3,13 @@
 @import "./components/Gallery/Gallery.scss";
 @import "./components/Header/Header.scss";
 
-.home_page_container {
+.home_page_container.fadeIn {
   padding-top: 60px;
+  animation-duration: 0.5s;
 }
 
 @media (min-width: 1100px) {
-  .home_page_container {
+  .home_page_container.fadeIn {
     padding-top: 90px;
   }
 }

@@ -1,7 +1,8 @@
 @import "../../scss/variables.scss";
 
-.profile_page_container {
+.profile_page_container.fadeIn {
   padding-top: 60px;
+  animation-duration: 0.6s;
 
   .information_container {
     height: 460px;
@@ -79,11 +80,21 @@
         }
       }
     }
+
+    .loading_container.loading {
+      width: 200px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
   }
 }
 
 @media (min-width: 768px) {
-  .profile_page_container {
+  .profile_page_container.fadeIn {
     .information_container {
       .body_information_container {
         .information_text_container {
@@ -103,7 +114,7 @@
 }
 
 @media (min-width: 950px) {
-  .profile_page_container {
+  .profile_page_container.fadeIn {
     .information_container {
       .wave_image {
         max-height: unset;
@@ -146,15 +157,19 @@
 }
 
 @media (min-width: 1100px) {
-  .profile_page_container {
+  .profile_page_container.fadeIn {
     padding-top: 90px;
   }
 }
 
 @media (min-width: 1400px) {
-  .profile_page_container {
+  .profile_page_container.fadeIn {
     .information_container {
       .body_information_container {
+        .profile_image_container {
+          width: 320px;
+          height: 320px;
+        }
         .information_text_container {
           .user_fullName {
             font-size: 64px;

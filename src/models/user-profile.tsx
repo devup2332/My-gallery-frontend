@@ -5,7 +5,8 @@ export interface UserProfile {
   createdAt?: string | Date;
   updatedAt?: string | Date;
   email?: string;
-  provide?: string;
+  provider?: string;
   password?: string;
   phone?: string;
+  description?: string;
 }

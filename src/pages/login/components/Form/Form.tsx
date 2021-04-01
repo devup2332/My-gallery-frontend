@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FormLoginProps } from "../../../../models/FormLogin";
+import { ReactComponent as LoadingSVG } from "../../../../assets/icons/loading.svg";
 
-const Form = ({ loginUser, pattern_email }: FormLoginProps) => {
+const Form = ({ loginUser, pattern_email, loading }: FormLoginProps) => {
   const { handleSubmit, register, errors } = useForm();
 
   return (
@@ -44,6 +45,7 @@ const Form = ({ loginUser, pattern_email }: FormLoginProps) => {
       </div>
 
       <button className="btn_login" type="submit">
+        {loading ? <LoadingSVG className="loading" /> : null}
         Login
       </button>
     </form>

@@ -1,38 +1,19 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { environments } from "../../environments";
+import React, { useEffect } from "react";
+import useUserLogged from "../../hooks/User-hook";
 import BannerComponent from "./components/Banner/Banner";
 import GalleryComponent from "./components/Gallery/Gallery";
 import HeaderComponent from "./components/Header/Header";
 import "./Home.scss";
 
 const HomePage = () => {
-  const [user, setUser] = useState();
-
-  const getUserData = async () => {
-    const token = localStorage.getItem("t1ks1ehn");
-    if (token) {
-      const { data } = await axios.get(
-        `${environments.api_uri}/user_logged_profile`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setUser(data.user);
-      return;
-    }
-  };
-
+  const { user, getUser } = useUserLogged();
   useEffect(() => {
-    getUserData();
-    return;
+    getUser();
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <div className="home_page_container">
+    <div className="home_page_container fadeIn">
       <HeaderComponent user={user} />
       <BannerComponent user={user} />
       <GalleryComponent />

@@ -42,12 +42,26 @@
     outline: none;
     color: $white_color;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     box-shadow: 0px 5px 5px 0px rgba($color: $dark_color, $alpha: 0.5);
     transition: background-color 0.3s ease, color 0.3s ease;
+
+    svg.loading {
+      fill: $white_color;
+      width: 20px;
+      margin-right: 10px;
+    }
+
     &:hover {
       background-color: $white_color;
       color: $facebook_color;
+
+      svg.loading {
+        fill: $dark_color;
+      }
     }
   }
 }

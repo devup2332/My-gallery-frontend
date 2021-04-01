@@ -16,13 +16,17 @@ let timer: NodeJS.Timeout;
 const LoginPage = () => {
   const history = useHistory();
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const loginUser = async (credentials: CredentialsLogin) => {
+    setLoading(true);
     clearTimeout(timer);
     const { data } = await axios.post(
       `${environments.api_uri}/login`,
       credentials
     );
+
+    setLoading(false);
 
     if (!data.status) {
       setMessage(data.message);
@@ -84,7 +88,11 @@ const LoginPage = () => {
 
           <span className="or">O</span>
 
-          <Form loginUser={loginUser} pattern_email={pattern_email} />
+          <Form
+            loginUser={loginUser}
+            pattern_email={pattern_email}
+            loading={loading}
+          />
 
           <p className="question_login">
             You still dont have an account ?{" "}

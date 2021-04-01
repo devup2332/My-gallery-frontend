@@ -76,3 +76,17 @@
     transform: translateX(0px);
   }
 }
+
+.loading {
+  animation: Loading 0.5s linear infinite;
+}
+
+@keyframes Loading {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

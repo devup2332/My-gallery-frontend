@@ -7,7 +7,7 @@ import Form from "../Form/Form";
 let newWindow: Window;
 
 const RigthSection = () => {
-  const history = useHistory();
+  const { push } = useHistory();
 
   const registerWithFacebook = async () => {
     newWindow = window.open(`${environments.api_uri}/auth/facebook`) as Window;
@@ -19,7 +19,7 @@ const RigthSection = () => {
     channel.bind("register-facebook", (data: any) => {
       newWindow?.close();
       localStorage.setItem("t1ks1ehn", data.token);
-      history.push("/home");
+      push("/home");
       channel.unbind();
       return;
     });
@@ -27,13 +27,13 @@ const RigthSection = () => {
     channel.bind("login-facebook", (data: any) => {
       newWindow?.close();
       localStorage.setItem("t1ks1ehn", data.token);
-      history.push("/home");
+      push("/home");
       channel.unbind();
       return;
     });
 
     return;
-  }, [history]);
+  }, [push]);
 
   return (
     <div className="container_form_register fadeIn">

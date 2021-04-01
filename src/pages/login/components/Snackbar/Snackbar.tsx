@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SnackbarProps } from "../../../../models/SnackbarProps.model";
 
 const Snackbar = ({ message, setMessage, timer }: SnackbarProps) => {
   const closeSnack = () => {
-    clearTimeout(timer);
-    setMessage("");
+    if (timer) {
+      setMessage("");
+      clearTimeout(timer);
+    } else {
+      setMessage("");
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+    // eslint-disable-next-line
+  }, []);
   return (
     <div className={message ? "snackbar on" : "snackbar"}>
       <span className="snack_message">{message}</span>

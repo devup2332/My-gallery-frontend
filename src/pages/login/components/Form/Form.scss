@@ -34,14 +34,27 @@
     background-color: $accent_color;
     color: $white_color;
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     font-weight: bolder;
     box-shadow: 0px 5px 5px 0px rgba($color: $dark_color, $alpha: 0.35);
     transition: background-color 0.3s ease, color 0.3s ease;
 
+    svg.loading {
+      width: 20px;
+      margin-right: 10px;
+      fill: $white_color;
+    }
+
     &:hover {
       background-color: $white_color;
       color: $accent_color;
+
+      svg.loading {
+        fill: $dark_color;
+      }
     }
   }
 }
