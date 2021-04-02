@@ -5,7 +5,7 @@ import { ReactComponent as MenuSVG } from "../../../../assets/icons/menu.svg";
 import { ReactComponent as SearchSVG } from "../../../../assets/icons/search.svg";
 import { useHistory } from "react-router";
 import { HeaderProps } from "../../../../models/header-home";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const HeaderComponent = ({ user }: HeaderProps) => {
   const navRef = useRef<HTMLDivElement>(null);
@@ -92,7 +92,7 @@ const HeaderComponent = ({ user }: HeaderProps) => {
             ref={btnMenuRef}
             onClick={openMenu}
           >
-            <img src={user?.avatar} alt="" />
+            <img src={user?.avatar?.secure_url} alt="" />
           </button>
         ) : (
           <button
@@ -108,9 +108,9 @@ const HeaderComponent = ({ user }: HeaderProps) => {
           <nav className="navigation_header user" ref={navRef}>
             <ul className="menu_navigation_header">
               <li className="menu_item_navigation">Add Photo</li>
-              <Link to="/profile" className="menu_item_navigation">
+              <NavLink to="/profile" className="menu_item_navigation">
                 Profile
-              </Link>
+              </NavLink>
               <li className="menu_item_navigation" onClick={logOutUser}>
                 Log Out
               </li>

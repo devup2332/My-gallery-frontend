@@ -1,7 +1,7 @@
 export interface UserProfile {
   id?: string | number;
   fullName?: string;
-  avatar?: string;
+  avatar?: any;
   createdAt?: string | Date;
   updatedAt?: string | Date;
   email?: string;

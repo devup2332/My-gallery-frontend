@@ -42,9 +42,8 @@ const EditProfilePage = () => {
 
   useEffect(() => {
     channel.bind("user-photo-updated", ({ message }: any) => {
-      console.log("Event received");
       getUser();
-      setMessage("User photo updated");
+      setMessage(message);
       timer = setTimeout(() => {
         setMessage("");
         clearTimeout(timer);
@@ -52,7 +51,6 @@ const EditProfilePage = () => {
     });
 
     channel.bind("user-updated", ({ message }: any) => {
-      console.log(message);
       setMessage(message);
     });
 
@@ -77,7 +75,7 @@ const EditProfilePage = () => {
             className="image_profile_container"
             onClick={() => inputFile.current?.click()}
           >
-            <img src={user?.avatar} alt="" />
+            <img src={user?.avatar.secure_url} alt="" />
             <div className="hover_content">
               <CameraSvg />
               <p className="hover_text">CHANGE PHOTO</p>

@@ -15,21 +15,31 @@ const usePhoto = () => {
 
   const updatePhoto = async (file: any) => {
     setProgress(0);
+
     const formData = new FormData();
+
     try {
       const { data } = await axios.get(`${environments.api_uri}/signature`);
+
       formData.append("file", file);
       formData.append("signature", data.signature);
       formData.append("api_key", data.api_key);
       formData.append("timestamp", data.timestamp);
       progressRef.current?.classList.add("on");
+
       const res = await axios.post(
         "https://api.cloudinary.com/v1_1/dder8kjda/image/upload",
         formData,
         { onUploadProgress: handleProgress }
       );
-      const avatar = res.data.secure_url;
-      await update({ avatar });
+
+      const { secure_url, public_id } = res.data;
+      update({
+        avatar: {
+          secure_url,
+          public_id,
+        },
+      });
     } catch (err) {
       throw err.message;
     }

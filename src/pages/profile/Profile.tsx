@@ -26,7 +26,11 @@ const ProfilePage = () => {
         {user?.id ? (
           <div className="body_information_container">
             <div className="profile_image_container">
-              <img className="user_image" src={user?.avatar} alt="" />
+              <img
+                className="user_image"
+                src={user?.avatar?.secure_url}
+                alt=""
+              />
             </div>
             <div className="information_text_container">
               <h1 className="user_fullName">{user?.fullName}</h1>

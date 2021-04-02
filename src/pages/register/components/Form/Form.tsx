@@ -17,7 +17,6 @@ const Form = () => {
   password.current = watch("password", "");
 
   const registerUser = async (user: UserFields) => {
-    console.log("Now");
     setLoading(true);
     delete user.confirm_password;
     const { data } = await axios.post(`${environments.api_uri}/register`, user);
@@ -35,18 +34,13 @@ const Form = () => {
       }
     );
     if (data.status) {
-      console.log("Email free");
       return true;
     }
     return data.message;
   };
 
-  const invalidUser = (errors: any) => {
-    console.log("Here", errors);
-  };
-
   return (
-    <form className="form" onSubmit={handleSubmit(registerUser, invalidUser)}>
+    <form className="form" onSubmit={handleSubmit(registerUser)}>
       <div className="input_container">
         <input
           className="input_form_register"
