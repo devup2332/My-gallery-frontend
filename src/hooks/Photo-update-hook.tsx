@@ -17,9 +17,13 @@ const usePhoto = () => {
     setProgress(0);
 
     const formData = new FormData();
-
+    const token = localStorage.getItem("t1ks1ehn");
     try {
-      const { data } = await axios.get(`${environments.api_uri}/signature`);
+      const { data } = await axios.get(`${environments.api_uri}/signature`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       formData.append("file", file);
       formData.append("signature", data.signature);
@@ -30,7 +34,9 @@ const usePhoto = () => {
       const res = await axios.post(
         "https://api.cloudinary.com/v1_1/dder8kjda/image/upload",
         formData,
-        { onUploadProgress: handleProgress }
+        {
+          onUploadProgress: handleProgress,
+        }
       );
 
       const { secure_url, public_id } = res.data;

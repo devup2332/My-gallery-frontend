@@ -1,0 +1,304 @@
+.upload_photo_page {
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  .upload_photo_page_body {
+    width: 85%;
+    margin: 40px auto 0px auto;
+    font-family: $main_font;
+    display: grid;
+    gap: 20px;
+    max-width: 400px;
+
+    .drop_section_controller_container {
+      min-height: 325px;
+
+      .drop_section_container {
+        border-radius: 10px;
+        border: 4px dotted $dark_color;
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        height: fit-content;
+
+        .body_drop_section {
+          svg {
+            width: 50px;
+            max-width: 100%;
+            margin: auto;
+            display: block;
+          }
+
+          .drop_section_text {
+            font-size: 18px;
+            margin-top: 20px;
+          }
+        }
+
+        img {
+          display: block;
+          max-width: 100%;
+        }
+      }
+
+      .message_error {
+        font-size: 12px;
+        color: $danger_color;
+        margin-top: 5px;
+      }
+
+      .drop_section_container.on {
+        border-color: $accent_color;
+      }
+    }
+
+    .form {
+      max-width: 100%;
+
+      .controller_upload {
+        height: 60px;
+        position: relative;
+
+        input {
+          height: 40px;
+          display: block;
+          width: 100%;
+          outline: none;
+          border: 2px solid $dark_color;
+          padding: 0px 10px;
+          font-size: 12px;
+        }
+
+        .message_error {
+          margin-top: 5px;
+          font-size: 12px;
+          color: $danger_color;
+        }
+      }
+
+      .tag_controller_container {
+        min-height: 65px;
+        position: relative;
+
+        .tags_controller_subcontainer {
+          border: 2px solid $dark_color;
+          min-height: 32px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px 10px;
+          padding: 3px 10px;
+          align-items: center;
+          position: relative;
+          margin-bottom: 5px;
+
+          span {
+            border-radius: 20px;
+            padding: 0px 10px;
+            background-color: #bdc3c7;
+            font-size: 12px;
+            height: 27px;
+            display: flex;
+            min-width: 70px;
+            align-items: center;
+            cursor: pointer;
+
+            svg {
+              width: 15px;
+              justify-self: flex-start;
+              display: block;
+              margin-left: 10px;
+            }
+          }
+
+          .inputTags {
+            border: none;
+            outline: none;
+            display: inline-block;
+            height: 30px;
+            background-color: transparent;
+            min-width: 100%;
+          }
+
+          .options_container {
+            background-color: $white_color;
+            border: 1px solid $dark_color;
+            z-index: 1;
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            width: 100%;
+
+            p {
+              padding: 10px 5px;
+              font-size: 12px;
+              cursor: pointer;
+              border-bottom: 1px solid rgba($color: $dark_color, $alpha: 0.35);
+            }
+          }
+
+          .options_container.on {
+            display: block;
+          }
+        }
+
+        .message_error {
+          color: red;
+          font-size: 12px;
+        }
+      }
+
+      .textarea_controller_upload {
+        height: 175px;
+
+        textarea {
+          height: 155px;
+          display: block;
+          width: 100%;
+          outline: none;
+          border: 2px solid $dark_color;
+          padding: 10px 10px;
+          font-family: $main_font;
+          font-size: 12px;
+          resize: none;
+        }
+
+        .message_error {
+          margin-top: 5px;
+          font-size: 12px;
+          color: $danger_color;
+        }
+      }
+
+      .btn_upload_photo {
+        display: block;
+        height: 32px;
+        width: 100%;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        background-color: $accent_color;
+        color: $white_color;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0px 5px 5px 0px rgba($color: $dark_color, $alpha: 0.35);
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          background-color: $white_color;
+          color: $accent_color;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 950px) {
+  .upload_photo_page {
+    .upload_photo_page_body {
+      margin: 100px auto 0px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: unset;
+      justify-content: space-between;
+      width: 75%;
+      gap: 30px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .upload_photo_page {
+    .upload_photo_page_body {
+      max-width: 1180px;
+
+      .drop_section_controller_container {
+        .drop_section_container {
+          min-height: 400px;
+
+          .body_drop_section {
+            svg {
+              width: 130px;
+            }
+
+            .drop_section_text {
+              font-size: 25px;
+            }
+          }
+        }
+        .message_error {
+          font-size: 15px;
+        }
+      }
+
+      .form {
+        display: grid;
+        gap: 10px;
+        max-height: 400px;
+
+        .controller_upload {
+          height: 68px;
+          input {
+            font-size: 15px;
+          }
+
+          .message_error {
+            font-size: 15px;
+          }
+        }
+
+        .tag_controller_container {
+          min-height: 72px;
+          .tags_controller_subcontainer {
+            span {
+              font-size: 15px;
+            }
+
+            .inputTags {
+              font-size: 15px;
+            }
+
+            .options_container {
+              p {
+                font-size: 15px;
+              }
+            }
+          }
+
+          .message_error {
+            font-size: 15px;
+          }
+        }
+
+        .textarea_controller_upload {
+          height: 180px;
+          textarea {
+            font-size: 15px;
+          }
+
+          .message_error {
+            font-size: 15px;
+          }
+        }
+
+        .btn_upload_photo {
+          font-size: 15px;
+          height: 48px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .upload_photo_page {
+    .upload_photo_page_body {
+      margin: 200px auto 0px auto;
+    }
+  }
+}

@@ -17,6 +17,9 @@ const ProfilePage = React.lazy(() => import("./pages/profile/Profile"));
 const EditProfilePage = React.lazy(
   () => import("./pages/edit-profile/EditProfile")
 );
+const UpdatePhotoPage = React.lazy(
+  () => import("./pages/upload-photo/UploadPhoto")
+);
 
 const pusher = new Pusher("7a1ea605dc1a765a5bc1", {
   cluster: "us2",
@@ -37,6 +40,7 @@ const App = () => {
         <PublicRoutesComponent Component={LoginPage} path="/login" />
         <PrivateRoutes Component={ProfilePage} path="/profile" />
         <PrivateRoutes Component={EditProfilePage} path="/edit-profile/:id" />
+        <PrivateRoutes Component={UpdatePhotoPage} path="/upload-photo" />
         <Redirect exact from="/" to="/home" />
         <Redirect exact from="/**" to="/404" />
       </Switch>

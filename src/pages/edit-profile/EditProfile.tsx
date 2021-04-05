@@ -7,6 +7,7 @@ import Snackbar from "../login/components/Snackbar/Snackbar";
 import { channel } from "../../app";
 import useUpdateUser from "../../hooks/Update-profile-hook";
 import usePhoto from "../../hooks/Photo-update-hook";
+import Progress from "./components/Progress/Progress";
 
 let timer: NodeJS.Timer;
 
@@ -93,14 +94,7 @@ const EditProfilePage = () => {
         </div>
       </div>
       <Snackbar message={message} timer={timer} setMessage={setMessage} />
-      <div className="progress_container" ref={progressRef}>
-        <div className="progress_bar_container">
-          <h1 className="progress_title">Uploading</h1>
-          <div className="bar">
-            <div className="progress" style={{ width: `${progress}%` }}></div>
-          </div>
-        </div>
-      </div>
+      <Progress progress={progress} progressRef={progressRef} />
     </div>
   );
 };

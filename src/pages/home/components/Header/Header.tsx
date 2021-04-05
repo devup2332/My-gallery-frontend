@@ -107,7 +107,9 @@ const HeaderComponent = ({ user }: HeaderProps) => {
         {token ? (
           <nav className="navigation_header user" ref={navRef}>
             <ul className="menu_navigation_header">
-              <li className="menu_item_navigation">Add Photo</li>
+              <NavLink to="/upload-photo" className="menu_item_navigation">
+                Add Photo
+              </NavLink>
               <NavLink to="/profile" className="menu_item_navigation">
                 Profile
               </NavLink>
