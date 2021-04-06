@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import UseUser from "../../hooks/User-hook";
-import HeaderComponent from "../home/components/Header/Header";
+import UseUser from "../../hooks/UseUser";
+import HeaderComponent from "../../components/Header/Header";
 import { ReactComponent as CameraSvg } from "../../assets/icons/logo_movile.svg";
 import Form from "./components/Form/Form";
-import Snackbar from "../login/components/Snackbar/Snackbar";
+import Snackbar from "../../components/Snackbar/Snackbar";
 import { channel } from "../../app";
-import useUpdateUser from "../../hooks/Update-profile-hook";
-import usePhoto from "../../hooks/Photo-update-hook";
-import Progress from "./components/Progress/Progress";
+import useUpdateUser from "../../hooks/UseUpdateProfile";
+import usePhoto from "../../hooks/UsePhotoUpdate";
+import Progress from "../../components/Progress/Progress";
 
 let timer: NodeJS.Timer;
 
@@ -16,22 +16,16 @@ const EditProfilePage = () => {
   const { update } = useUpdateUser();
   const { progress, updatePhoto, progressRef } = usePhoto();
   const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const inputFile = useRef<HTMLInputElement>(null);
 
   const updateUser = async (body: any) => {
     setLoading(true);
-    if (timer) {
-      clearTimeout(timer);
-    }
+    setOpen(false);
+    clearTimeout(timer);
     await update(body);
-
     setLoading(false);
-
-    timer = setTimeout(() => {
-      setMessage("");
-      clearTimeout(timer);
-    }, 3000);
   };
 
   const handleFile = async (e: any) => {
@@ -43,24 +37,31 @@ const EditProfilePage = () => {
 
   useEffect(() => {
     channel.bind("user-photo-updated", ({ message }: any) => {
+      console.log("user-photo-updated");
       getUser();
+      setOpen(true);
       setMessage(message);
       timer = setTimeout(() => {
         setMessage("");
+        setOpen(false);
         clearTimeout(timer);
       }, 3000);
     });
 
     channel.bind("user-updated", ({ message }: any) => {
+      console.log("user-updated");
+      setOpen(true);
       setMessage(message);
+      timer = setTimeout(() => {
+        setMessage("");
+        setOpen(false);
+        clearTimeout(timer);
+      }, 3000);
     });
 
-    getUser();
-
     return () => {
-      if (timer) {
-        clearTimeout(timer);
-      }
+      clearTimeout(timer);
+
       channel.unbind();
     };
     // eslint-disable-next-line
@@ -68,7 +69,7 @@ const EditProfilePage = () => {
 
   return (
     <div className="edit_profile_page fadeIn">
-      <HeaderComponent user={user} />
+      {user ? <HeaderComponent user={user} /> : null}
       <div className="subcontainer_edit_profile">
         <h1 className="title_edit_profile">EDIT PROFILE</h1>
         <div className="form_container">
@@ -90,10 +91,12 @@ const EditProfilePage = () => {
             ref={inputFile}
             onChange={handleFile}
           />
-          <Form user={user} updateUser={updateUser} loading={loading} />
+          {user ? (
+            <Form user={user} updateUser={updateUser} loading={loading} />
+          ) : null}
         </div>
       </div>
-      <Snackbar message={message} timer={timer} setMessage={setMessage} />
+      <Snackbar message={message} open={open} />
       <Progress progress={progress} progressRef={progressRef} />
     </div>
   );

@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FormLoginProps } from "../../../../models/FormLogin";
+import { FormLoginProps } from "../../../../models/Props/FormLoginProps";
 import { ReactComponent as LoadingSVG } from "../../../../assets/icons/loading.svg";
+import { environments } from "../../../../environments";
 
-const Form = ({ loginUser, pattern_email, loading }: FormLoginProps) => {
+const Form = ({ loginUser, loading }: FormLoginProps) => {
   const { handleSubmit, register, errors } = useForm();
 
   return (
@@ -19,7 +20,7 @@ const Form = ({ loginUser, pattern_email, loading }: FormLoginProps) => {
             },
             pattern: {
               message: "Invalid Email",
-              value: pattern_email,
+              value: environments.email_pattern,
             },
           })}
           placeholder="Email"

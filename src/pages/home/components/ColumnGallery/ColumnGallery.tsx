@@ -1,23 +1,23 @@
 import React from "react";
-import { ColumGallery } from "../../../../models/column";
+import { ColumnGalleryProps } from "../../../../models/Props/ColumnsProps";
 import { ReactComponent as DownloadSVG } from "../../../../assets/icons/download.svg";
 
-const ColumnGalleryComponent = ({ images }: ColumGallery) => {
+const ColumnGalleryComponent = ({ photos }: ColumnGalleryProps) => {
   return (
     <div className="column_gallery">
-      {images.map((image) => {
+      {photos?.map((photo) => {
         return (
-          <div className="image_container" key={image.id}>
-            <img src={image.url} alt="" />
+          <div className="image_container" key={photo?.id}>
+            <img src={photo.secure_url} alt="" />
             <div className="hover_container">
               <button className="download_image_btn">
                 <DownloadSVG />
               </button>
               <div className="username_information">
                 <div className="image_avatar_container">
-                  <img src={image.user.avatar} alt="" />
+                  <img src={photo.user.avatar.secure_url} alt="" />
                 </div>
-                <span className="username_name">{`${image.user.name} ${image.user.lastName}`}</span>
+                <span className="username_name">{`${photo?.user?.fullName}`}</span>
               </div>
             </div>
           </div>

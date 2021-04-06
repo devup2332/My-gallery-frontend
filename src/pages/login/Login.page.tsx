@@ -1,40 +1,45 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { environments } from "../../environments";
-import { CredentialsLogin } from "../../models/Credentials-login.model";
+import { Credentials } from "../../models/Interfaces/Creadentials";
 import Form from "./components/Form/Form";
-import Snackbar from "./components/Snackbar/Snackbar";
+import Snackbar from "../../components/Snackbar/Snackbar";
 import { channel } from "../../app";
 import { ReactComponent as Vector } from "../../assets/icons/login-vector.svg";
 import Wave from "../../assets/images/wave-vector-login.png";
 
-const pattern_email = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 let myWindow: Window;
-let timer: NodeJS.Timeout;
+let timer: NodeJS.Timer;
 
 const LoginPage = () => {
   const history = useHistory();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const loginUser = async (credentials: CredentialsLogin) => {
+  const loginUser = async (credentials: Credentials) => {
     setLoading(true);
-    clearTimeout(timer);
+
+    if (open) {
+      clearTimeout(timer);
+      setOpen(false);
+    }
     const { data } = await axios.post(
-      `${environments.api_uri}/login`,
+      `${environments.api_uri}/auth/login`,
       credentials
     );
 
     setLoading(false);
 
     if (!data.status) {
+      setOpen(true);
       setMessage(data.message);
-      timer = setTimeout(() => {
+
+      return (timer = setTimeout(() => {
+        setOpen(false);
         setMessage("");
-        clearTimeout(timer);
-      }, 2000);
-      return;
+      }, 3000));
     }
 
     localStorage.setItem("t1ks1ehn", data.token);
@@ -43,11 +48,6 @@ const LoginPage = () => {
 
   const loginFacebook = () => {
     myWindow = window.open(`${environments.api_uri}/auth/facebook`) as Window;
-  };
-
-  const goToRegister = () => {
-    history.push("/register");
-    clearTimeout(timer);
   };
 
   useEffect(() => {
@@ -65,7 +65,9 @@ const LoginPage = () => {
       channel.unbind();
       return;
     });
-    return;
+    return () => {
+      clearTimeout(timer);
+    };
   }, [history]);
 
   return (
@@ -88,21 +90,17 @@ const LoginPage = () => {
 
           <span className="or">O</span>
 
-          <Form
-            loginUser={loginUser}
-            pattern_email={pattern_email}
-            loading={loading}
-          />
+          <Form loginUser={loginUser} loading={loading} />
 
           <p className="question_login">
             You still dont have an account ?{" "}
-            <span className="link" onClick={goToRegister}>
+            <Link className="link" to="/register">
               Register
-            </span>
+            </Link>
           </p>
         </div>
       </div>
-      <Snackbar message={message} setMessage={setMessage} timer={timer} />
+      <Snackbar message={message} open={open} />
     </div>
   );
 };

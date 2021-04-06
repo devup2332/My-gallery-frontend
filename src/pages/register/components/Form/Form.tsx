@@ -3,11 +3,8 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { environments } from "../../../../environments";
-import { UserFields } from "../../../../models/user-register-fields.model";
+import { RegisterFields } from "../../../../models/Interfaces/RegisterFields";
 import { ReactComponent as LoadingSVG } from "../../../../assets/icons/loading.svg";
-
-const pattern_email = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-const pattern_number = /^[0-9]+$/;
 
 const Form = () => {
   const { errors, handleSubmit, register, watch } = useForm();
@@ -16,10 +13,13 @@ const Form = () => {
   const password = useRef();
   password.current = watch("password", "");
 
-  const registerUser = async (user: UserFields) => {
+  const registerUser = async (user: RegisterFields) => {
     setLoading(true);
     delete user.confirm_password;
-    const { data } = await axios.post(`${environments.api_uri}/register`, user);
+    const { data } = await axios.post(
+      `${environments.api_uri}/auth/register`,
+      user
+    );
     setLoading(false);
     localStorage.setItem("t1ks1ehn", data.token);
     history.push("/home");
@@ -28,7 +28,7 @@ const Form = () => {
 
   const validateEmail = async (email: string) => {
     const { data } = await axios.post(
-      `${environments.api_uri}/validate_email`,
+      `${environments.api_uri}/auth/validate_email`,
       {
         email,
       }
@@ -67,7 +67,7 @@ const Form = () => {
               message: "Please enter your email",
             },
             pattern: {
-              value: pattern_email,
+              value: environments.email_pattern,
               message: "Email is invalid",
             },
             validate: {
@@ -91,7 +91,7 @@ const Form = () => {
               message: "Enter a phone number",
             },
             pattern: {
-              value: pattern_number,
+              value: environments.number_pattern,
               message: "Just numbers",
             },
           })}

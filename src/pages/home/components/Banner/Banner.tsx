@@ -1,7 +1,7 @@
 import React from "react";
 import WaveImage from "../../../../assets/images/wave-image.png";
 import { ReactComponent as BannerVector } from "../../../../assets/icons/banner-vector.svg";
-import { BannerProps } from "../../../../models/banner-home";
+import { BannerProps } from "../../../../models/Props/BannerProps";
 import { Link } from "react-router-dom";
 
 const BannerComponent = ({ user }: BannerProps) => {

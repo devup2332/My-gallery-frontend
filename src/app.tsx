@@ -5,10 +5,10 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import PublicRoutesComponent from "./guards/public-routes";
+import PublicRoutesComponent from "./guards/PublicRoutes";
 import "./styles.scss";
 import Pusher from "pusher-js";
-import PrivateRoutes from "./guards/private-routes";
+import PrivateRoutes from "./guards/PrivateRoutes";
 
 const HomePage = React.lazy(() => import("./pages/home/Home"));
 const RegisterPage = React.lazy(() => import("./pages/register/Register"));

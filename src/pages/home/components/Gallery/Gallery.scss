@@ -2,7 +2,8 @@
   padding: 50px 0px;
 
   .subcontainer_gallery {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 40px;
     max-width: 1400px;
     margin: auto;
@@ -12,8 +13,17 @@
 @media (min-width: 600px) {
   .gallery_component_container {
     .subcontainer_gallery {
+      grid-template-columns: 1fr 1fr;
       width: 76%;
       max-width: 1180px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .gallery_component_container {
+    .subcontainer_gallery {
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 }

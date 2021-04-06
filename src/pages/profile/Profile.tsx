@@ -1,25 +1,23 @@
 import React, { useEffect } from "react";
-import HeaderComponent from "../home/components/Header/Header";
+import HeaderComponent from "../../components/Header/Header";
 import Wave from "../../assets/images/wave-image.png";
 import GalleryComponent from "../home/components/Gallery/Gallery";
 import { Link } from "react-router-dom";
-import useUserLogged from "../../hooks/User-hook";
+import useUser from "../../hooks/UseUser";
 import { ReactComponent as LoadingSVG } from "../../assets/icons/loading.svg";
+import NoPhotos from "../../components/NoPhoto/NoPhoto";
 
 const ProfilePage = () => {
-  const { user, getUser } = useUserLogged();
+  const { user, photos } = useUser();
 
   useEffect(() => {
-    getUser();
-
     return () => {};
     // eslint-disable-next-line
   }, []);
 
   return (
     <div className="profile_page_container fadeIn">
-      <HeaderComponent user={user} />
-
+      {user ? <HeaderComponent user={user} /> : null}
       <div className="information_container">
         <img className="wave_image" src={Wave} alt="" />
 
@@ -47,7 +45,11 @@ const ProfilePage = () => {
           <LoadingSVG className="loading_container loading" />
         )}
       </div>
-      <GalleryComponent />
+      {photos?.length > 0 ? (
+        <GalleryComponent photos={photos} />
+      ) : (
+        <NoPhotos text="You dont have any photo" />
+      )}
     </div>
   );
 };

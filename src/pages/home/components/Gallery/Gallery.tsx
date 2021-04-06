@@ -1,15 +1,18 @@
 import React from "react";
-import { images } from "../../../../data";
-import UseColumns from "../../../../hooks/Columns-hook";
+import UseColumns from "../../../../hooks/UseColumns";
+import { GalleryProps } from "../../../../models/Props/GalleryProps";
 import ColumnGalleryComponent from "../ColumnGallery/ColumnGallery";
 
-const GalleryComponent = () => {
-  const { columns } = UseColumns(images);
+const GalleryComponent = ({ photos }: GalleryProps) => {
+  const { columns } = UseColumns(photos);
+
   return (
     <div className="gallery_component_container">
       <div className="subcontainer_gallery">
-        {columns.map((images) => {
-          return <ColumnGalleryComponent images={images} key={images[0].id} />;
+        {columns.map((column) => {
+          return (
+            <ColumnGalleryComponent photos={column.photos} key={column.id} />
+          );
         })}
       </div>
     </div>

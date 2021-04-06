@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { environments } from "../../../../environments";
-import { FormUpdateProfileProps } from "../../../../models/form-update-profile";
+import { FormUpdateProfileProps } from "../../../../models/Props/FormUpdateProfileProps";
 import { ReactComponent as LoadingSVG } from "../../../../assets/icons/loading.svg";
 
 const FormComponent = ({
