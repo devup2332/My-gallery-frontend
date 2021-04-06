@@ -64,3 +64,21 @@
     visibility: visible;
   }
 }
+
+@media (min-width: 1000px) {
+  .input-tags-container {
+    min-height: 40px;
+    align-items: center;
+
+    span {
+      font-size: 15px;
+
+      svg {
+        width: 15px;
+      }
+    }
+    input {
+      font-size: 15px;
+    }
+  }
+}

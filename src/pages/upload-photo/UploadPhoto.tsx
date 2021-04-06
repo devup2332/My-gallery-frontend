@@ -45,6 +45,7 @@ const UploadPhotoPage = () => {
       <HeaderComponent user={user} />
 
       <div className="container">
+        <h1 className="title_page">Upload Photo</h1>
         <div className="dropzone-container">
           <Dropzone register={register} />
           <div className="message_error">{errors.image?.message}</div>

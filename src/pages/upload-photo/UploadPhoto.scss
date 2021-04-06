@@ -7,13 +7,22 @@
   padding: 60px 0px;
 
   .container {
-    width: 85%;
+    width: 87%;
+    max-width: 430px;
     margin: 50px auto 0px auto;
     font-family: $main_font;
     display: grid;
     gap: 20px;
 
+    .title_page {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 40px;
+    }
+
     .dropzone-container {
+      cursor: pointer;
+      height: fit-content;
       .dropzone {
         border: 3px dotted $dark_color;
         display: flex;
@@ -128,6 +137,72 @@
           background-color: $white_color;
           color: $accent_color;
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .upload_photo_page.fadeIn {
+    .container {
+      margin: 100px auto 0px auto;
+      grid-template-columns: 1fr 1.2fr;
+      max-width: 1180px;
+      width: 75%;
+      gap: 50px;
+
+      .title_page {
+        text-align: left;
+        font-size: 50px;
+        grid-column: 1 / 3;
+      }
+
+      .form {
+        max-height: 435px;
+        .controller_container {
+          height: 65px;
+          input {
+            font-size: 15px;
+            height: 40px;
+          }
+
+          .message_error {
+            font-size: 15px;
+          }
+        }
+
+        .special-container {
+          .message_error {
+            font-size: 15px;
+          }
+        }
+
+        .controller-textarea-container {
+          textarea {
+            font-size: 15px;
+          }
+
+          .message_error {
+            font-size: 15px;
+          }
+        }
+
+        .btn-upload-image {
+          height: 40px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .upload_photo_page.fadeIn {
+    .container {
+      grid-template-columns: 1fr 2fr;
+
+      .title_page {
+        font-size: 55px;
       }
     }
   }
