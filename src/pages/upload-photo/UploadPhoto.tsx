@@ -21,6 +21,10 @@ const UploadPhotoPage = () => {
   const { progress, uploadNewPhoto, progressRef } = useUploadPhoto();
 
   const uploadImage = async (form: NewPhoto) => {
+    for (const tag of tags) {
+      tag.name = tag.name.toLowerCase();
+    }
+    console.log(tags);
     form.tags = tags;
     clearTimeout(timer);
     setOpen(false);
@@ -51,7 +55,7 @@ const UploadPhotoPage = () => {
           <div className="message_error">{errors.image?.message}</div>
         </div>
 
-        <form className="form" onSubmit={handleSubmit(uploadImage)}>
+        <form className="form">
           <div className="controller_container">
             <input
               type="text"
@@ -92,7 +96,11 @@ const UploadPhotoPage = () => {
             <p className="message_error">{errors.description?.message}</p>
           </div>
 
-          <button className="btn-upload-image" type="submit">
+          <button
+            className="btn-upload-image"
+            type="button"
+            onClick={handleSubmit(uploadImage)}
+          >
             Upload
           </button>
         </form>

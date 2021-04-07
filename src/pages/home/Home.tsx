@@ -7,10 +7,12 @@ import BannerComponent from "./components/Banner/Banner";
 import GalleryComponent from "./components/Gallery/Gallery";
 import HeaderComponent from "../../components/Header/Header";
 import "./Home.scss";
+import { useParams } from "react-router";
 
 const HomePage = () => {
   const { user } = useUser();
   const [photos, setPhotos] = useState([]);
+  const { text } = useParams() as any;
 
   const getPhotos = async () => {
     const r = await axios.get(`${environments.api_uri}/photos`);
@@ -20,7 +22,7 @@ const HomePage = () => {
   useEffect(() => {
     getPhotos();
     // eslint-disable-next-line
-  }, []);
+  }, [text]);
 
   return (
     <div className="home_page_container fadeIn">

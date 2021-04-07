@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { ReactComponent as LogoMovileSVG } from "../../assets/icons/logo_movile.svg";
 import { ReactComponent as LogoTabletSVG } from "../../assets/icons/logo_tablet.svg";
 import { ReactComponent as MenuSVG } from "../../assets/icons/menu.svg";
@@ -27,6 +27,16 @@ const HeaderComponent = ({ user }: HeaderProps) => {
     ) {
       navRef.current?.classList.remove("bounce_menu");
       window.removeEventListener("click", HandleClick);
+    }
+  };
+
+  const searchPhoto = (e: FormEvent) => {
+    const input = document.querySelector<HTMLInputElement>(
+      ".input_search_header"
+    );
+    e.preventDefault();
+    if (input?.value) {
+      history.push(`/search/${input?.value}`);
     }
   };
 
@@ -76,7 +86,7 @@ const HeaderComponent = ({ user }: HeaderProps) => {
           <Link to="/home" className="logo_header_container">
             {changeLogo ? <LogoTabletSVG /> : <LogoMovileSVG />}
           </Link>
-          <form className="input_search_container">
+          <form className="input_search_container" onSubmit={searchPhoto}>
             <input
               type="text"
               className="input_search_header"

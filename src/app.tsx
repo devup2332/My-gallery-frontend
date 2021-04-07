@@ -21,6 +21,8 @@ const UpdatePhotoPage = React.lazy(
   () => import("./pages/upload-photo/UploadPhoto")
 );
 
+const SearchPage = React.lazy(() => import("./pages/search-page/SearchPage"));
+
 const pusher = new Pusher("7a1ea605dc1a765a5bc1", {
   cluster: "us2",
 });
@@ -34,6 +36,11 @@ const App = () => {
         <Route exact path="/home">
           <Suspense fallback="loading">
             <HomePage />
+          </Suspense>
+        </Route>
+        <Route exact path="/search/:text">
+          <Suspense fallback="loading">
+            <SearchPage />
           </Suspense>
         </Route>
         <PublicRoutesComponent Component={RegisterPage} path="/register" />

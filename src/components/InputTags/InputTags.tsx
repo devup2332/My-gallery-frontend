@@ -29,14 +29,12 @@ const InputTags = ({ register, setTags, tags }: InputTagsProps) => {
     }
   };
 
-  const closeOptions = (e: MouseEvent) => {
+  const closeOptions = (e?: MouseEvent) => {
     if (
       !document
         .querySelector(".input-tags-container")
-        ?.contains(e.target as Node) &&
-      !document.querySelector(".d")?.contains(e.target as Node)
+        ?.contains(e?.target as Node)
     ) {
-      console.log("Closed");
       container?.classList.remove("on");
     }
   };
@@ -58,14 +56,37 @@ const InputTags = ({ register, setTags, tags }: InputTagsProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     openOptions();
     const text = e.target.value;
+    const input = document.querySelector<HTMLInputElement>(".inputTags");
+
     let i = Date.now();
+
+    input?.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "Enter") {
+          setTags([
+            ...tags,
+            {
+              name: text,
+              id: i,
+            },
+          ]);
+          input.value = "";
+          container?.classList.remove("on");
+        }
+
+        return;
+      },
+      {
+        once: true,
+      }
+    );
 
     const newOptions = localTags.filter((tag) => {
       return tag.name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
     });
 
     if (newOptions.length === 0) {
-      console.log("here");
       setApiTags([
         {
           name: text,
@@ -88,7 +109,6 @@ const InputTags = ({ register, setTags, tags }: InputTagsProps) => {
     });
     localTags = data.options;
     setApiTags(data.options);
-    console.log("Tags form api", data.options);
     return data.options;
   };
 
