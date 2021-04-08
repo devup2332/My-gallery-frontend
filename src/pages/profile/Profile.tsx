@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderComponent from "../../components/Header/Header";
 import Wave from "../../assets/images/wave-image.png";
 import GalleryComponent from "../home/components/Gallery/Gallery";
@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import useUser from "../../hooks/UseUser";
 import { ReactComponent as LoadingSVG } from "../../assets/icons/loading.svg";
 import NoPhotos from "../../components/NoPhoto/NoPhoto";
+import SliderImage from "../../components/SliderImages/SliderImage";
 
 const ProfilePage = () => {
   const { user, photos } = useUser();
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     return () => {};
@@ -46,10 +48,12 @@ const ProfilePage = () => {
         )}
       </div>
       {photos?.length > 0 ? (
-        <GalleryComponent photos={photos} />
+        <GalleryComponent photos={photos} setIndex={setIndex} />
       ) : (
         <NoPhotos text="You dont have any photo" />
       )}
+
+      <SliderImage photos={photos} index={index} setIndex={setIndex} />
     </div>
   );
 };

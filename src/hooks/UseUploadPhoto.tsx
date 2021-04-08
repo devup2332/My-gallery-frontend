@@ -43,6 +43,8 @@ const useUploadPhoto = () => {
       image: {
         secure_url: r2.data.secure_url,
         public_id: r2.data.public_id,
+        width: r2.data.width,
+        height: r2.data.height,
       },
     };
 

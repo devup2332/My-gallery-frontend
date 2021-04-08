@@ -27,6 +27,21 @@ $padding_hover: 20px;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
 
+      .btn_delete_photo {
+        position: absolute;
+        width: 30px;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        top: $padding_hover;
+        left: $padding_hover;
+        cursor: pointer;
+
+        svg {
+          fill: $danger_color;
+        }
+      }
+
       .download_image_btn {
         position: absolute;
         top: $padding_hover;
@@ -122,6 +137,10 @@ $padding_hover: 20px;
   .column_gallery {
     .image_container {
       .hover_container {
+        .btn_delete_photo {
+          top: $padding_hover;
+          left: $padding_hover;
+        }
         .download_image_btn {
           top: $padding_hover;
           right: $padding_hover;

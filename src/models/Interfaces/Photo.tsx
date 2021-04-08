@@ -5,4 +5,8 @@ export interface Photo {
   public_id?: string;
   id?: number;
   user: UserProfile;
+  updatedAt: Date;
+  createdAt: Date;
+  width: string | number;
+  height: string | number;
 }
