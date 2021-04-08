@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import HeaderComponent from "../../components/Header/Header";
+import NoPhotos from "../../components/NoPhoto/NoPhoto";
 import SliderImage from "../../components/SliderImages/SliderImage";
 import { environments } from "../../environments";
 import useUser from "../../hooks/UseUser";
@@ -26,7 +27,11 @@ const SearchPage = () => {
   return (
     <div className="search-page fadeIn">
       {user ? <HeaderComponent user={user} /> : <HeaderComponent />}
-      {photos ? <GalleryComponent photos={photos} setIndex={setIndex} /> : null}
+      {photos.length > 0 ? (
+        <GalleryComponent photos={photos} setIndex={setIndex} />
+      ) : (
+        <NoPhotos text="No photo found" />
+      )}
 
       <SliderImage photos={photos} index={index} setIndex={setIndex} />
     </div>

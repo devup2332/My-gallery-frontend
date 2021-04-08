@@ -51,9 +51,13 @@ const GalleryComponent = ({ photos, setIndex, setOpen }: GalleryProps) => {
                           <TrashSVG />
                         </button>
                       ) : null}
-                      <button className="download_image_btn">
+                      <a
+                        className="download_image_btn"
+                        href={photo.secure_url}
+                        target="blank"
+                      >
                         <DownloadSVG />
-                      </button>
+                      </a>
                       <div className="username_information">
                         <div className="image_avatar_container">
                           <img src={photo.user.avatar.secure_url} alt="" />

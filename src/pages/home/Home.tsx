@@ -33,7 +33,7 @@ const HomePage = () => {
       {photos.length > 0 ? (
         <GalleryComponent photos={photos} setIndex={setIndex} />
       ) : (
-        <NoPhoto text="Database is void" />
+        <NoPhoto text="Database is empty" />
       )}
       <SliderImage photos={photos} index={index} setIndex={setIndex} />
     </div>

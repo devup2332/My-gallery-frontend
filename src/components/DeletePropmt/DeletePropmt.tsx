@@ -1,11 +1,18 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useEffect } from "react";
 import "./DeletePropmt.scss";
 import { ReactComponent as AlertSvg } from "../../assets/icons/alert.svg";
 import { DeletePromptProps } from "../../models/Props/DeletePromptProps";
 import axios from "axios";
 import { environments } from "../../environments";
 
-const DeletePropmt = ({ open, setOpen, photo }: DeletePromptProps) => {
+let timer: NodeJS.Timer;
+
+const DeletePropmt = ({
+  open,
+  setOpen,
+  photo,
+  setOpenSnack,
+}: DeletePromptProps) => {
   const closePrompt = (e: MouseEvent<HTMLDivElement>) => {
     const container = document.querySelector<HTMLDivElement>(
       ".deletepropmt-container"
@@ -16,9 +23,23 @@ const DeletePropmt = ({ open, setOpen, photo }: DeletePromptProps) => {
   };
 
   const deletePhoto = async () => {
+    if (timer) {
+      clearTimeout(timer);
+    }
     await axios.delete(`${environments.api_uri}/photos/${photo.id}`);
     setOpen(false);
+    setOpenSnack(true);
+
+    timer = setTimeout(() => {
+      setOpenSnack(false);
+    }, 3000);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <div

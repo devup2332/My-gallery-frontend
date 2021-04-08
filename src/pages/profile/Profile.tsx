@@ -9,11 +9,13 @@ import NoPhotos from "../../components/NoPhoto/NoPhoto";
 import SliderImage from "../../components/SliderImages/SliderImage";
 import DeletePropmt from "../../components/DeletePropmt/DeletePropmt";
 import { channel } from "../../app";
+import Snackbar from "../../components/Snackbar/Snackbar";
 
 const ProfilePage = () => {
   const { user, photos, getUser } = useUser();
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openSnack, setOpenSnack] = useState(false);
 
   useEffect(() => {
     channel.bind("photo-deleted", async ({ message }: any) => {
@@ -67,7 +69,13 @@ const ProfilePage = () => {
       )}
 
       <SliderImage photos={photos} index={index} setIndex={setIndex} />
-      <DeletePropmt open={open} setOpen={setOpen} photo={photos[index]} />
+      <DeletePropmt
+        open={open}
+        setOpen={setOpen}
+        photo={photos[index]}
+        setOpenSnack={setOpenSnack}
+      />
+      <Snackbar open={openSnack} message="Photo deleted" />
     </div>
   );
 };
