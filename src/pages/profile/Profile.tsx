@@ -7,13 +7,22 @@ import useUser from "../../hooks/UseUser";
 import { ReactComponent as LoadingSVG } from "../../assets/icons/loading.svg";
 import NoPhotos from "../../components/NoPhoto/NoPhoto";
 import SliderImage from "../../components/SliderImages/SliderImage";
+import DeletePropmt from "../../components/DeletePropmt/DeletePropmt";
+import { channel } from "../../app";
 
 const ProfilePage = () => {
-  const { user, photos } = useUser();
+  const { user, photos, getUser } = useUser();
   const [index, setIndex] = useState(0);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    return () => {};
+    channel.bind("photo-deleted", async ({ message }: any) => {
+      await getUser();
+      console.log(message);
+    });
+    return () => {
+      channel.unbind("photo-deleted");
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -48,12 +57,17 @@ const ProfilePage = () => {
         )}
       </div>
       {photos?.length > 0 ? (
-        <GalleryComponent photos={photos} setIndex={setIndex} />
+        <GalleryComponent
+          photos={photos}
+          setIndex={setIndex}
+          setOpen={setOpen}
+        />
       ) : (
         <NoPhotos text="You dont have any photo" />
       )}
 
       <SliderImage photos={photos} index={index} setIndex={setIndex} />
+      <DeletePropmt open={open} setOpen={setOpen} photo={photos[index]} />
     </div>
   );
 };

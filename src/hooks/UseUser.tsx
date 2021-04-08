@@ -12,8 +12,8 @@ export const useUser = () => {
 
   const { location } = useHistory();
 
-  const getUserPhotos = async (user: UserProfile) => {
-    const r = await axios.get(`${environments.api_uri}/photos/${user.id}`, {
+  const getUserPhotos = async (user?: UserProfile) => {
+    const r = await axios.get(`${environments.api_uri}/photos/${user?.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

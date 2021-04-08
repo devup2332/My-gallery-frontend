@@ -6,7 +6,7 @@ import { ReactComponent as TrashSVG } from "../../../../assets/icons/trash.svg";
 import { useHistory } from "react-router";
 import disbleScroll from "disable-scroll";
 
-const GalleryComponent = ({ photos, setIndex }: GalleryProps) => {
+const GalleryComponent = ({ photos, setIndex, setOpen }: GalleryProps) => {
   const { columns } = UseColumns(photos);
   const { location } = useHistory();
 
@@ -16,12 +16,16 @@ const GalleryComponent = ({ photos, setIndex }: GalleryProps) => {
   ) => {
     const hoverContainer = document.querySelectorAll(".hover_container");
     const gallery = document.querySelector(".slider_image_component");
-    console.log(hoverContainer);
     if (e.target === hoverContainer[index]) {
       gallery?.classList.add("visible");
       setIndex(index);
       disbleScroll.on();
     }
+  };
+
+  const deletePhoto = (index: number) => {
+    setOpen?.(true);
+    setIndex(index);
   };
 
   return (
@@ -40,7 +44,10 @@ const GalleryComponent = ({ photos, setIndex }: GalleryProps) => {
                     <img src={photo.secure_url} alt="" />
                     <div className="hover_container">
                       {location.pathname === "/profile" ? (
-                        <button className="btn_delete_photo">
+                        <button
+                          className="btn_delete_photo"
+                          onClick={() => deletePhoto(photos.indexOf(photo))}
+                        >
                           <TrashSVG />
                         </button>
                       ) : null}
