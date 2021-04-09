@@ -20,7 +20,6 @@ const ProfilePage = () => {
   useEffect(() => {
     channel.bind("photo-deleted", async ({ message }: any) => {
       await getUser();
-      console.log(message);
     });
     return () => {
       channel.unbind("photo-deleted");

@@ -5,6 +5,7 @@ import { ReactComponent as DownloadSVG } from "../../../../assets/icons/download
 import { ReactComponent as TrashSVG } from "../../../../assets/icons/trash.svg";
 import { useHistory } from "react-router";
 import disbleScroll from "disable-scroll";
+import { Photo } from "../../../../models/Interfaces/Photo";
 
 const GalleryComponent = ({ photos, setIndex, setOpen }: GalleryProps) => {
   const { columns } = UseColumns(photos);
@@ -12,15 +13,13 @@ const GalleryComponent = ({ photos, setIndex, setOpen }: GalleryProps) => {
 
   const openViewPhoto = (
     index: number,
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    photo: Photo
   ) => {
-    const hoverContainer = document.querySelectorAll(".hover_container");
     const gallery = document.querySelector(".slider_image_component");
-    if (e.target === hoverContainer[index]) {
-      gallery?.classList.add("visible");
-      setIndex(index);
-      disbleScroll.on();
-    }
+    gallery?.classList.add("visible");
+    setIndex(index);
+    disbleScroll.on();
   };
 
   const deletePhoto = (index: number) => {
@@ -39,7 +38,9 @@ const GalleryComponent = ({ photos, setIndex, setOpen }: GalleryProps) => {
                   <div
                     className="image_container"
                     key={photo?.id}
-                    onClick={(e) => openViewPhoto(photos.indexOf(photo), e)}
+                    onClick={(e) =>
+                      openViewPhoto(photos.indexOf(photo), e, photo)
+                    }
                   >
                     <img src={photo.secure_url} alt="" />
                     <div className="hover_container">

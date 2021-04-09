@@ -8,7 +8,6 @@ const useUpdateUser = () => {
   const { id } = useParams() as any;
 
   const updateProfile = async (user: UserProfile) => {
-    console.log(user);
     const { data } = await axios.put(
       `${environments.api_uri}/user/update/${id}`,
       user,

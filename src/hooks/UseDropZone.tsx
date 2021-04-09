@@ -73,8 +73,6 @@ const UseDropzone = () => {
     });
 
     return () => {
-      console.log("Removed all listeners");
-
       ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
         dropSection.current?.removeEventListener(eventName, preventDefaults);
       });

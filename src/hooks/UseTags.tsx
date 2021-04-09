@@ -60,7 +60,6 @@ const UseTags = () => {
     });
 
     if (newOptions.length === 0) {
-      console.log("No options");
       setAutocompleOptions([
         {
           id: i,

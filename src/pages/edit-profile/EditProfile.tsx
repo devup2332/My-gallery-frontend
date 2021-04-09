@@ -37,7 +37,6 @@ const EditProfilePage = () => {
 
   useEffect(() => {
     channel.bind("user-photo-updated", ({ message }: any) => {
-      console.log("user-photo-updated");
       getUser();
       setOpen(true);
       setMessage(message);
@@ -49,7 +48,6 @@ const EditProfilePage = () => {
     });
 
     channel.bind("user-updated", ({ message }: any) => {
-      console.log("user-updated");
       setOpen(true);
       setMessage(message);
       timer = setTimeout(() => {

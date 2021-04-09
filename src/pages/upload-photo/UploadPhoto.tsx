@@ -24,7 +24,6 @@ const UploadPhotoPage = () => {
     for (const tag of tags) {
       tag.name = tag.name.toLowerCase();
     }
-    console.log(tags);
     form.tags = tags;
     clearTimeout(timer);
     setOpen(false);
