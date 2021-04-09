@@ -26,7 +26,10 @@ const DeletePropmt = ({
     if (timer) {
       clearTimeout(timer);
     }
-    await axios.delete(`${environments.api_uri}/photos/${photo.id}`);
+    console.log("deleting");
+    await axios.delete(`${environments.api_uri}/photos/${photo.id}`, {
+      onUploadProgress: (e) => console.log((e.loaded * 100) / e.total),
+    });
     setOpen(false);
     setOpenSnack(true);
 
@@ -50,7 +53,7 @@ const DeletePropmt = ({
     >
       <div className="modal">
         <h1>Are you sure ?</h1>
-        <p>This action wont be abble to reject</p>
+        <p>This action cannot be reversed</p>
         <AlertSvg />
         <div className="btns">
           <button type="button" onClick={deletePhoto}>
